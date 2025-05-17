@@ -14,6 +14,10 @@
 
 https://www.sujalvanjare.com/blog/dark-mode-nextjs15-tailwind-v4
 
+### prisma
+
+https://www.prisma.io/docs/guides/nextjs
+
 ## Etc
 
 ### Pretendard font
