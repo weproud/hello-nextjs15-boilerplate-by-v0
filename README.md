@@ -18,9 +18,11 @@ https://www.sujalvanjare.com/blog/dark-mode-nextjs15-tailwind-v4
 
 https://www.prisma.io/docs/guides/nextjs
 
+- authjs adapter
+  https://authjs.dev/getting-started/adapters/prisma
+
 ## Etc
 
 ### Pretendard font
 
 https://white-blank.tistory.com/213
-

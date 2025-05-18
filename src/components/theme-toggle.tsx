@@ -1,13 +1,13 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <button
-      type="button"
+    <Button
       className="cursor-pointer bg-white dark:bg-[#191919] text-[#37352f] dark:text-[#ffffffcf] hover:bg-hover-background active:bg-active-background rounded-md border border-button-border-color p-1.5 [transition:background_20ms_ease-in,_color_0.15s]"
       title="Toggle theme"
       aria-label="Toggle theme"
@@ -43,6 +43,6 @@ export default function ThemeToggle() {
           clipRule="evenodd"
         ></path>
       </svg>
-    </button>
+    </Button>
   );
 }

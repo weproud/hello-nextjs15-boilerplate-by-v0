@@ -1,5 +1,7 @@
 import ThemeToggle from "@/components/theme-toggle";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -8,7 +10,12 @@ export default function Home() {
         <Label className="text-4xl font-black">
           Hello Nextjs 15 Boilerplate by v0
         </Label>
-        <ThemeToggle />
+        <div className="flex gap-2">
+          <ThemeToggle />
+          <Button>
+            <Link href="/auth/signin">Sign In</Link>
+          </Button>
+        </div>
       </main>
     </div>
   );
