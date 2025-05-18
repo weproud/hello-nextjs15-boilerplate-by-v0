@@ -2,8 +2,16 @@
 
 import ThemeProvider from "@/components/theme-provider";
 import type { ReactNode } from "react";
+import { NextIntlClientProvider } from "next-intl";
 
-export function Providers({ children }: { children: ReactNode }) {
+interface ProvidersProps {
+  children: ReactNode;
+  locale: string;
+  timeZone: string;
+  messages: any;
+}
+
+export function Providers({ children, locale, timeZone, messages }: ProvidersProps) {
   return (
     <ThemeProvider
       attribute="class"
@@ -11,7 +19,9 @@ export function Providers({ children }: { children: ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      <NextIntlClientProvider locale={locale} messages={messages} timeZone={timeZone}>
+        {children}
+      </NextIntlClientProvider>
     </ThemeProvider>
   );
 }

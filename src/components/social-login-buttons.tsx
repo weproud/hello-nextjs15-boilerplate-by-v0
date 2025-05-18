@@ -54,7 +54,6 @@ export function SocialLoginButtons() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<Record<string, boolean>>({
     google: false,
-    facebook: false,
     kakao: false,
   });
 

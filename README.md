@@ -21,7 +21,16 @@ https://www.prisma.io/docs/guides/nextjs
 - authjs adapter
   https://authjs.dev/getting-started/adapters/prisma
 
+### next-intl
+
+https://next-intl.dev/
+https://github.com/amannn/next-intl/tree/main/examples/example-app-router-without-i18n-routing
+https://github.com/amannn/next-intl/tree/main/examples/example-app-router-next-auth
+
+
 ## Etc
+
+
 
 ### Pretendard font
 
