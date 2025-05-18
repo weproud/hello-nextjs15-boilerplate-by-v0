@@ -3,6 +3,7 @@
 import ThemeProvider from "@/components/theme-provider";
 import type { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
+import { SessionProvider } from "next-auth/react";
 
 interface ProvidersProps {
   children: ReactNode;
@@ -11,7 +12,12 @@ interface ProvidersProps {
   messages: any;
 }
 
-export function Providers({ children, locale, timeZone, messages }: ProvidersProps) {
+export function Providers({
+  children,
+  locale,
+  timeZone,
+  messages,
+}: ProvidersProps) {
   return (
     <ThemeProvider
       attribute="class"
@@ -19,8 +25,12 @@ export function Providers({ children, locale, timeZone, messages }: ProvidersPro
       enableSystem
       disableTransitionOnChange
     >
-      <NextIntlClientProvider locale={locale} messages={messages} timeZone={timeZone}>
-        {children}
+      <NextIntlClientProvider
+        locale={locale}
+        messages={messages}
+        timeZone={timeZone}
+      >
+        <SessionProvider>{children}</SessionProvider>
       </NextIntlClientProvider>
     </ThemeProvider>
   );

@@ -7,6 +7,9 @@
 ## Tech Stack
 
 ### authjs
+https://authjs.dev/
+https://authjs.dev/getting-started/installation?framework=Next.js
+https://authjs.dev/reference/prisma-adapter
 
 ### shadcn/ui
 
