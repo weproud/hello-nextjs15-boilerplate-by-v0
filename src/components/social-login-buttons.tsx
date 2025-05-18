@@ -1,11 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { signIn } from "@/auth";
 
 // 소셜 로그인 버튼 스타일 정의
 const socialButtonStyles = {
@@ -67,13 +67,13 @@ export function SocialLoginButtons() {
       });
 
       if (result?.error) {
-        toast.error("소셜 로그인 실패");
+        toast.error("Failed to sign in");
       } else if (result?.url) {
-        toast.success("소셜 로그인 성공");
+        toast.success("Sign in successfully");
         router.push(result.url);
       }
     } catch (error) {
-      toast.error(`소셜 로그인 실패: ${error}`);
+      toast.error(`Failed to sign in: ${error}`);
     } finally {
       setIsLoading((prev) => ({ ...prev, [provider]: false }));
     }
@@ -114,7 +114,7 @@ export function SocialLoginButtons() {
         ) : (
           socialButtonStyles.google.icon
         )}
-        Conntinue with Google
+        Continue with Google
       </Button>
     </div>
   );
