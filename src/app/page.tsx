@@ -7,11 +7,14 @@ import { Button } from "@/components/ui/button";
 import { useLocale, useTranslations } from "next-intl";
 import LocaleSwitcherSelect from "@/components/locale-switcher-select";
 import { useSession, signOut } from "next-auth/react";
+import { TiptapEditor } from "@/components/editor/tiptap-editor";
+import { useState } from "react";
 
 export default function Home() {
   const t = useTranslations();
   const locale = useLocale();
   const { status } = useSession();
+  const [content, setContent] = useState("");
 
   const isAuthenticated = status === "authenticated";
 
@@ -46,6 +49,12 @@ export default function Home() {
           />
           <Label>{t("HomePage.title")}</Label>
         </div>
+        <TiptapEditor
+          contentText={content}
+          onChange={setContent}
+          placeholder="Enter content"
+          className="min-h-[400px] min-w-[800px]"
+        />
       </main>
     </div>
   );
