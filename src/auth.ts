@@ -34,5 +34,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return token;
     },
+    async session({ session, token }) {
+      // 세션에 사용자 ID 추가
+      if (token && session.user && token.id) {
+        session.user.id = token.id as string;
+      }
+      return session;
+    },
   },
 });

@@ -13,7 +13,7 @@ import { LinkPreviews } from "./link-previews";
 
 interface TiptapEditorProps {
   contentText: string;
-  onChange: (content: string) => void;
+  onChange: (content: string, html?: string) => void;
   placeholder?: string;
   className?: string;
   autofocus?: boolean;
@@ -58,7 +58,7 @@ export function TiptapEditor({
     ],
     content,
     onUpdate: ({ editor }) => {
-      onChange(editor.getText());
+      onChange(editor.getText(), editor.getHTML());
     },
     autofocus,
     enableInputRules: true,

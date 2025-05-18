@@ -80,11 +80,10 @@ export function SitePreview({ url }: SitePreviewProps) {
           <>
             {metadata?.image && (
               <div className="relative h-[200px] w-full">
-                <Image
+                <img
                   src={metadata.image}
                   alt={metadata.title || "Site preview"}
-                  fill
-                  className="object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
               </div>
             )}
