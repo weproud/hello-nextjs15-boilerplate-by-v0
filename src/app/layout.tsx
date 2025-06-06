@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
 import { Providers } from "./providers";
 import { pretendard } from "@/lib/fonts";
 import { getLocale, getMessages, getTimeZone } from "next-intl/server";
+import "./globals.css";
 
 // NextJS 15: 향상된 메타데이터 설정
 export const metadata: Metadata = {
@@ -73,8 +73,10 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({
   children,
+  auth,
 }: Readonly<{
   children: React.ReactNode;
+  auth: React.ReactNode;
 }>) {
   const locale = await getLocale();
   const messages = await getMessages();
@@ -98,6 +100,7 @@ export default async function RootLayout({
       <body className={`${pretendard.variable} antialiased`}>
         <Providers locale={locale} messages={messages} timeZone={timeZone}>
           {children}
+          {auth}
         </Providers>
       </body>
     </html>
