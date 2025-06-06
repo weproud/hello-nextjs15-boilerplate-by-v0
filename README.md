@@ -126,3 +126,4 @@ hello-nextjs15-boilerplate-by-v0/
 한글 웹 타이포그래피를 위한 고품질 폰트입니다.
 
 - https://white-blank.tistory.com/213
+# lagompath
