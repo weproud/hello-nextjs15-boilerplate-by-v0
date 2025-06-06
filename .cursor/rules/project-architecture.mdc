@@ -1,0 +1,233 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# 프로젝트 아키텍처 가이드
+
+## 폴더 구조 개요
+
+```
+프로젝트 루트/
+├── .cursor/
+│   └── rules/                    # Cursor IDE 규칙
+├── src/
+│   ├── app/                      # Next.js 15 App Router
+│   │   ├── [locale]/            # 국제화 라우팅
+│   │   ├── api/                 # API Routes
+│   │   ├── globals.css          # 전역 스타일
+│   │   ├── layout.tsx           # 루트 레이아웃
+│   │   ├── page.tsx             # 홈페이지
+│   │   ├── providers.tsx        # 전역 Provider
+│   │   ├── robots.ts           # SEO 로봇 설정
+│   │   └── sitemap.ts          # 사이트맵 생성
+│   ├── components/              # 재사용 가능한 컴포넌트
+│   │   └── ui/                 # shadcn/ui 컴포넌트
+│   ├── lib/                    # 유틸리티 및 헬퍼
+│   └── types/                  # TypeScript 타입 정의
+├── prisma/                     # 데이터베이스 스키마
+├── messages/                   # 국제화 메시지
+└── 설정 파일들
+```
+
+## App Router 구조 패턴
+
+### 페이지 및 레이아웃
+- `app/layout.tsx` - [루트 레이아웃](mdc:src/app/layout.tsx) 메타데이터, 프로바이더 설정
+- `app/page.tsx` - 홈페이지 컴포넌트
+- `app/[locale]/` - 국제화 지원 라우팅
+
+### API Routes 패턴
+API Routes는 `app/api/` 디렉토리에 위치하며, [url-meta 예시](mdc:src/app/api/url-meta/route.ts)를 참조하세요:
+
+```typescript
+// app/api/example/route.ts
+import { connection } from 'next/server';
+
+export async function GET() {
+  await connection(); // Next.js 15: 동적 렌더링 명시
+  
+  // API 로직
+  return Response.json({ data: 'example' });
+}
+
+export const dynamic = 'force-dynamic'; // 캐싱 전략 명시
+```
+
+## 컴포넌트 아키텍처
+
+### 컴포넌트 분류
+1. **페이지 컴포넌트** (`app/**/page.tsx`) - 라우트별 메인 컴포넌트
+2. **레이아웃 컴포넌트** (`app/**/layout.tsx`) - 공통 레이아웃
+3. **UI 컴포넌트** (`components/ui/`) - shadcn/ui 기반 기본 컴포넌트
+4. **비즈니스 컴포넌트** (`components/`) - 도메인 로직 포함 컴포넌트
+
+### 컴포넌트 파일 구조
+```typescript
+// components/example/ExampleComponent.tsx
+interface ExampleComponentProps {
+  title: string;
+  description?: string;
+}
+
+export function ExampleComponent({ title, description }: ExampleComponentProps) {
+  return (
+    <div>
+      <h2>{title}</h2>
+      {description && <p>{description}</p>}
+    </div>
+  );
+}
+```
+
+## 유틸리티 및 라이브러리
+
+### lib/ 디렉토리 구조
+```
+src/lib/
+├── utils.ts           # 공통 유틸리티 (cn 함수 등)
+├── auth.ts           # 인증 관련 설정
+├── db.ts            # 데이터베이스 연결
+├── validations.ts    # Zod 스키마 검증
+└── constants.ts      # 상수 정의
+```
+
+### 유틸리티 사용 패턴
+```typescript
+// lib/utils.ts 참조
+import { cn } from "@/lib/utils";
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+## 국제화 (i18n) 구조
+
+### next-intl 패턴
+```
+messages/
+├── en.json          # 영어 메시지
+└── ko.json          # 한국어 메시지
+
+app/
+├── [locale]/        # 국제화 라우팅
+│   ├── layout.tsx   # 언어별 레이아웃
+│   └── page.tsx     # 언어별 페이지
+```
+
+### 국제화 사용 패턴
+```typescript
+import { useTranslations } from 'next-intl';
+
+export function Component() {
+  const t = useTranslations('namespace');
+  return <h1>{t('title')}</h1>;
+}
+```
+
+## 데이터베이스 아키텍처
+
+### Prisma 구조
+```
+prisma/
+├── schema.prisma    # 데이터베이스 스키마
+├── migrations/      # 마이그레이션 파일
+└── seed.ts         # 시드 데이터
+```
+
+### 데이터베이스 사용 패턴
+```typescript
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+// CRUD 패턴 예시
+export async function getUser(id: string) {
+  return await prisma.user.findUnique({
+    where: { id }
+  });
+}
+```
+
+## 스타일링 아키텍처
+
+### Tailwind CSS v4 구조
+- `app/globals.css` - [전역 스타일](mdc:src/app/globals.css)
+- 컴포넌트별 Tailwind 클래스 사용
+- [PostCSS 설정](mdc:postcss.config.mjs)으로 최적화
+
+### 스타일 패턴
+```tsx
+// ✅ 권장: cn 유틸리티 사용
+<div className={cn(
+  "base-classes",
+  variant === "primary" && "text-blue-600",
+  size === "large" && "text-lg",
+  className
+)}>
+```
+
+## 보안 및 성능 레이어
+
+### 미들웨어 레이어
+[middleware.ts](mdc:src/app/middleware.ts)에서 다음을 처리:
+- CSP 헤더 설정
+- 보안 헤더 추가
+- 경로별 접근 제어
+
+### 성능 모니터링
+[providers.tsx](mdc:src/app/providers.tsx)에서 Web Vitals 추적:
+- Core Web Vitals 메트릭
+- 개발/프로덕션 환경별 처리
+
+## SEO 및 메타데이터 관리
+
+### 메타데이터 레이어
+- [layout.tsx](mdc:src/app/layout.tsx) - 기본 메타데이터
+- [robots.ts](mdc:src/app/robots.ts) - 크롤러 제어
+- [sitemap.ts](mdc:src/app/sitemap.ts) - 사이트맵 동적 생성
+
+### 메타데이터 패턴
+```typescript
+export const metadata: Metadata = {
+  title: {
+    template: '%s | 사이트명',
+    default: '기본 제목'
+  },
+  description: '페이지 설명',
+  openGraph: {
+    title: 'OG 제목',
+    description: 'OG 설명',
+    images: ['/og-image.png']
+  }
+};
+```
+
+## 빌드 및 배포 설정
+
+### 빌드 최적화
+- [next.config.ts](mdc:next.config.ts) - Turbopack, 이미지 최적화
+- [tsconfig.json](mdc:tsconfig.json) - TypeScript 최적화
+- [package.json](mdc:package.json) - 빌드 스크립트
+
+### 환경별 설정
+```
+.env.local          # 로컬 개발 환경
+.env.development    # 개발 환경
+.env.production     # 프로덕션 환경
+```
+
+## 코드 품질 관리
+
+### 린팅 및 포맷팅
+- [eslint.config.mjs](mdc:eslint.config.mjs) - ESLint 규칙
+- [.prettierrc](mdc:.prettierrc) - 코드 포맷팅
+- Pre-commit 훅으로 자동 검증
+
+### 타입 안전성
+- 엄격한 TypeScript 설정
+- Zod 스키마 검증
+- API 응답 타입 정의
