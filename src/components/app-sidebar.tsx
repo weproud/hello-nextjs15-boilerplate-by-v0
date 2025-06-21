@@ -1,30 +1,24 @@
 "use client"
 
-import { Calendar, Home, Inbox, Search, Settings, FileText, Plus, User } from "lucide-react"
+import { Calendar, FileText, Home, Inbox, Plus, Search, Settings, User } from "lucide-react"
 import { useSession } from "next-auth/react"
-import { useTranslations } from "next-intl"
 import Link from "next/link"
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-  SidebarSeparator,
-} from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarGroup,
+    SidebarGroupContent,
+    SidebarGroupLabel,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    SidebarSeparator,
+} from "@/components/ui/sidebar"
 
 export function AppSidebar() {
-  const t = useTranslations()
   const { data: session, status } = useSession()
   const isAuthenticated = status === "authenticated"
 

@@ -6,15 +6,6 @@ const nextConfig: NextConfig = {
   experimental: {
     // 향후 동적 IO 기능을 위한 준비
     dynamicIO: false, // 기본값, 필요시 true로 변경
-    // Turbopack 안정성 향상
-    turbo: {
-      rules: {
-        "*.svg": {
-          loaders: ["@svgr/webpack"],
-          as: "*.js",
-        },
-      },
-    },
   },
   // 번들 분석 최적화
   bundlePagesRouterDependencies: true,

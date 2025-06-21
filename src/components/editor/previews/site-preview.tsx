@@ -43,7 +43,7 @@ export function SitePreview({ url }: SitePreviewProps) {
           title: data.title || "Unknown Title",
           description: data.description || "No description available",
           image: data.image,
-          url: url,
+          url,
         });
 
         setLoading(false);

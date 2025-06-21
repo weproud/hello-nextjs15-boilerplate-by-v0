@@ -32,7 +32,6 @@ const eslintConfig = [
         },
       ],
       "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/prefer-const": "error",
 
       // 일반적인 코드 품질
       "no-console": ["warn", { allow: ["warn", "error"] }],

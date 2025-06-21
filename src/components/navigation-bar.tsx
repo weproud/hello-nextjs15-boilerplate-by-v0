@@ -1,34 +1,33 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
-import { useLocale, useTranslations } from "next-intl";
-import { Menu, X } from "lucide-react";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 import { Separator } from "@/components/ui/separator";
-import ThemeToggle from "./theme-toggle";
-import LocaleSwitcherSelect from "./locale-switcher-select";
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { Menu } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
+import { useLocale } from "next-intl";
+import Link from "next/link";
+import * as React from "react";
+import LocaleSwitcherSelect from "./locale-switcher-select";
+import ThemeToggle from "./theme-toggle";
 
 export function NavigationBar() {
-  const t = useTranslations();
   const locale = useLocale();
   const { data: session, status } = useSession();
   const [open, setOpen] = React.useState(false);
@@ -68,7 +67,7 @@ export function NavigationBar() {
                   <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
-                        <a
+                        <Link
                           className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                           href="/"
                         >
@@ -78,7 +77,7 @@ export function NavigationBar() {
                           <p className="text-sm leading-tight text-muted-foreground">
                             게시글을 작성하고 관리할 수 있습니다.
                           </p>
-                        </a>
+                        </Link>
                       </NavigationMenuLink>
                     </li>
                     <ListItem href="/" title="게시글 목록">

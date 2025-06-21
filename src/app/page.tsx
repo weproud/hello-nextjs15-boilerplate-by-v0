@@ -1,13 +1,12 @@
 "use client";
 
-import { Label } from "@/components/ui/label";
-import { useLocale, useTranslations } from "next-intl";
-import { useSession } from "next-auth/react";
 import { PostForm } from "@/components/post/post-form";
 import { PostList, PostListHandle } from "@/components/post/post-list";
-import { Toaster } from "@/components/ui/sonner";
-import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Toaster } from "@/components/ui/sonner";
+import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRef } from "react";
 

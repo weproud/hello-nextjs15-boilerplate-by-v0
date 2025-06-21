@@ -71,7 +71,7 @@ export const PostList = forwardRef<PostListHandle, PostListProps>(
 
         console.log("게시글 목록 가져오기 성공", {
           postsCount: posts.length,
-          nextCursor: nextCursor,
+          nextCursor,
         });
 
         if (cursor) {
