@@ -4,6 +4,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import { useReportWebVitals } from "next/web-vitals";
+import { StagewiseToolbar } from "@stagewise/toolbar-next";
+import { ReactPlugin } from "@stagewise-plugins/react";
 
 // NextJS 15: Web Vitals 리포팅 컴포넌트
 function WebVitals() {
@@ -57,6 +59,12 @@ export function Providers({
   timeZone,
 }: ProvidersProps) {
   return (
+    <>
+      {/* 개발 환경에서만 Stagewise 툴바 렌더링 */}
+      {process.env.NODE_ENV === 'development' && (
+        <StagewiseToolbar config={{ plugins: [ReactPlugin] }} />
+      )}
+      
     <SessionProvider>
       <NextIntlClientProvider
         locale={locale}
@@ -75,5 +83,6 @@ export function Providers({
         </ThemeProvider>
       </NextIntlClientProvider>
     </SessionProvider>
+</>
   );
 }

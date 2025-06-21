@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Providers } from "./providers";
 import { pretendard } from "@/lib/fonts";
 import { getLocale, getMessages, getTimeZone } from "next-intl/server";
+import { Toaster } from "sonner";
+import { NavigationBar } from "@/components/navigation-bar";
 import "./globals.css";
 
 // NextJS 15: 향상된 메타데이터 설정
@@ -97,10 +99,12 @@ export default async function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className={`${pretendard.variable} antialiased`}>
+      <body className={`${pretendard.variable} antialiased dark`}>
         <Providers locale={locale} messages={messages} timeZone={timeZone}>
+          <NavigationBar />
           {children}
           {auth}
+          <Toaster />
         </Providers>
       </body>
     </html>

@@ -3,9 +3,9 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { signIn } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
-import { signIn } from "@/auth";
 
 // 소셜 로그인 버튼 스타일 정의
 const socialButtonStyles = {

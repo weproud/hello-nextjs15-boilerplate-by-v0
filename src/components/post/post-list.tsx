@@ -54,21 +54,36 @@ export const PostList = forwardRef<PostListHandle, PostListProps>(
           cursor,
         });
 
+        console.log("게시글 목록 가져오기 응답:", result);
+
+        // 서버 액션 에러 처리
+        if (result.serverError) {
+          throw new Error(result.serverError);
+        }
+
+        // 서버 액션이 성공했지만 데이터가 없는 경우
+        if (!result.data) {
+          console.error("데이터가 없음:", result);
+          throw new Error("게시글 데이터를 가져올 수 없습니다.");
+        }
+
+        const { posts, nextCursor } = result.data;
+
         console.log("게시글 목록 가져오기 성공", {
-          postsCount: result.posts.length,
-          nextCursor: result.nextCursor,
+          postsCount: posts.length,
+          nextCursor: nextCursor,
         });
 
         if (cursor) {
           // 더 불러오기인 경우 기존 목록에 추가
-          setPosts((prev) => [...prev, ...result.posts]);
+          setPosts((prev) => [...prev, ...posts]);
         } else {
           // 처음 불러오는 경우 목록 교체
-          setPosts(result.posts);
+          setPosts(posts);
         }
 
-        setNextCursor(result.nextCursor);
-        setHasMore(!!result.nextCursor);
+        setNextCursor(nextCursor);
+        setHasMore(!!nextCursor);
       } catch (error) {
         console.error("게시글 목록 가져오기 실패:", error);
       } finally {

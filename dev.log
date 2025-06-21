@@ -1,0 +1,101 @@
+
+> hello-nextjs15-boilerplate-by-v0@0.1.0 dev /Users/raiiz/madeinnook/workspace/hello-nextjs15-boilerplate-by-v0
+> next dev --turbopack
+
+   ▲ Next.js 15.3.2 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.45.187:3000
+   - Environments: .env.local, .env
+   - Experiments (use with caution):
+     · turbo
+
+ ✓ Starting...
+ ✓ Compiled middleware in 333ms
+ ✓ Ready in 1290ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.6s
+ GET / 200 in 2984ms
+퍼블릭 액션 호출됨
+getPosts 서버 액션 호출됨 { limit: 10, cursor: undefined }
+Prisma 클라이언트 확인: true
+ ○ Compiling /_not-found/page ...
+ POST / 200 in 562ms
+ GET /fonts/pretendard-variable.woff2 404 in 1034ms
+ ✓ Compiled /_not-found/page in 1046ms
+ GET /api/auth/session 200 in 1094ms
+ GET /api/auth/session 200 in 19ms
+ GET / 200 in 67ms
+ GET /fonts/pretendard-variable.woff2 404 in 61ms
+ GET /api/auth/session 200 in 28ms
+ GET /api/auth/session 200 in 54ms
+퍼블릭 액션 호출됨
+getPosts 서버 액션 호출됨 { limit: 10, cursor: undefined }
+Prisma 클라이언트 확인: true
+ POST / 200 in 450ms
+ GET / 200 in 86ms
+ GET /fonts/pretendard-variable.woff2 404 in 72ms
+ GET /api/auth/session 200 in 28ms
+퍼블릭 액션 호출됨
+getPosts 서버 액션 호출됨 { limit: 10, cursor: undefined }
+Prisma 클라이언트 확인: true
+ GET /api/auth/session 200 in 54ms
+ POST / 200 in 407ms
+   Reload env: .env
+ GET / 200 in 187ms
+ GET / 200 in 261ms
+ GET /fonts/pretendard-variable.woff2 404 in 101ms
+ GET /api/auth/session 200 in 85ms
+퍼블릭 액션 호출됨
+getPosts 서버 액션 호출됨 { limit: 10, cursor: undefined }
+Prisma 클라이언트 확인: true
+ GET /api/auth/session 200 in 39ms
+게시글 조회 성공: { postsCount: 0, nextCursor: undefined }
+ POST / 200 in 151ms
+ GET / 200 in 98ms
+ GET /fonts/pretendard-variable.woff2 404 in 139ms
+ GET /api/auth/session 200 in 63ms
+퍼블릭 액션 호출됨
+getPosts 서버 액션 호출됨 { limit: 10, cursor: undefined }
+Prisma 클라이언트 확인: true
+게시글 조회 성공: { postsCount: 0, nextCursor: undefined }
+ POST / 200 in 74ms
+ GET /api/auth/session 200 in 43ms
+ ○ Compiling /(.)auth/signin ...
+ ✓ Compiled /(.)auth/signin in 809ms
+ GET /auth/signin 200 in 842ms
+ GET /api/auth/providers 200 in 27ms
+ GET /api/auth/csrf 200 in 23ms
+ POST /api/auth/signin/google? 200 in 279ms
+ GET /api/auth/session 200 in 21ms
+ GET /api/auth/callback/google?code=4%2F0AUJR-x74TMpAaI1ekttdobnQbgPRMcvufqNy7JK2x03v_eBMYBAGwhBD4fzWJng3MYC3jQ&scope=email+profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&authuser=1&prompt=none 302 in 395ms
+ GET / 200 in 67ms
+ GET /fonts/pretendard-variable.woff2 404 in 93ms
+ GET /api/auth/session 200 in 53ms
+퍼블릭 액션 호출됨
+getPosts 서버 액션 호출됨 { limit: 10, cursor: undefined }
+Prisma 클라이언트 확인: true
+게시글 조회 성공: { postsCount: 0, nextCursor: undefined }
+ POST / 200 in 53ms
+ GET /api/auth/session 200 in 34ms
+createPost 함수 호출됨, 데이터: {"content":"hello","contentHtml":"<p>hello</p>"}
+세션 정보: 세션 있음
+사용자 ID: cmc5j61j20000pgzr23r3tezf
+인증 성공, 사용자 ID: cmc5j61j20000pgzr23r3tezf
+게시글 생성 성공, ID: cmc5j677e0002pgzrhbvtwyty
+ POST / 200 in 116ms
+ GET / 200 in 29ms
+퍼블릭 액션 호출됨
+getPosts 서버 액션 호출됨 { limit: 10, cursor: undefined }
+Prisma 클라이언트 확인: true
+게시글 조회 성공: { postsCount: 1, nextCursor: undefined }
+ POST / 200 in 28ms
+ ✓ Compiled in 125ms
+ GET / 200 in 459ms
+ GET /fonts/pretendard-variable.woff2 404 in 128ms
+ GET /api/auth/session 200 in 54ms
+퍼블릭 액션 호출됨
+getPosts 서버 액션 호출됨 { limit: 10, cursor: undefined }
+Prisma 클라이언트 확인: true
+게시글 조회 성공: { postsCount: 1, nextCursor: undefined }
+ POST / 200 in 65ms
+ GET /api/auth/session 200 in 39ms

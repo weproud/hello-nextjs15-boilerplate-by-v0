@@ -172,6 +172,9 @@ export async function getPosts(data: { limit?: number; cursor?: string } = {}) {
 
   const handler = await withoutAuth(schema, async ({ limit, cursor }) => {
     try {
+      console.log("getPosts 서버 액션 호출됨", { limit, cursor });
+      console.log("Prisma 클라이언트 확인:", !!prisma);
+      
       const posts = await prisma.post.findMany({
         where: {
           deletedAt: null,
@@ -200,12 +203,15 @@ export async function getPosts(data: { limit?: number; cursor?: string } = {}) {
         nextCursor = nextItem?.id;
       }
 
+      console.log("게시글 조회 성공:", { postsCount: posts.length, nextCursor });
+      
       return {
         posts,
         nextCursor,
       };
     } catch (error) {
-      console.error("게시글 목록 조회 중 오류 발생:", error);
+      console.error("게시글 목록 조회 중 실제 오류 발생:", error);
+      console.error("오류 스택:", error instanceof Error ? error.stack : error);
       throw new Error("게시글 목록을 조회하는 중 오류가 발생했습니다.");
     }
   });
