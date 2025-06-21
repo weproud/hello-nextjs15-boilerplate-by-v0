@@ -4,6 +4,7 @@ import { YoutubeIcon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 import { Card, CardContent } from '@/components/ui/card';
+import { AppCard, AppCardContent } from '@/components/app-card';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface YouTubePreviewProps {
@@ -46,8 +47,8 @@ export function YouTubePreview({ url }: YouTubePreviewProps) {
   }
 
   return (
-    <Card className="overflow-hidden">
-      <CardContent className="p-0">
+    <AppCard variant="hover" className="overflow-hidden rounded-lg">
+      <AppCardContent className="p-0">
         {loading ? (
           <div className="flex aspect-video items-center justify-center bg-muted">
             <Skeleton className="h-full w-full" />
@@ -71,7 +72,7 @@ export function YouTubePreview({ url }: YouTubePreviewProps) {
             </div>
           </>
         )}
-      </CardContent>
-    </Card>
+      </AppCardContent>
+    </AppCard>
   );
 }

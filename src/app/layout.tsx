@@ -4,6 +4,8 @@ import { pretendard } from "@/lib/fonts";
 import { getLocale, getMessages, getTimeZone } from "next-intl/server";
 import { Toaster } from "sonner";
 import { NavigationBar } from "@/components/navigation-bar";
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 import "./globals.css";
 
 // NextJS 15: 향상된 메타데이터 설정
@@ -101,9 +103,25 @@ export default async function RootLayout({
       </head>
       <body className={`${pretendard.variable} antialiased dark`}>
         <Providers locale={locale} messages={messages} timeZone={timeZone}>
+          {/* Navigation Bar - Fixed at top */}
           <NavigationBar />
-          {children}
-          {auth}
+          
+          {/* Sidebar Layout */}
+          <SidebarProvider>
+            <AppSidebar />
+            <SidebarInset>
+              <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+                <div className="flex items-center gap-2 px-4">
+                  <SidebarTrigger className="-ml-1" />
+                </div>
+              </header>
+              <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                {children}
+                {auth}
+              </main>
+            </SidebarInset>
+          </SidebarProvider>
+          
           <Toaster />
         </Providers>
       </body>

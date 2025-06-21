@@ -2,7 +2,7 @@
 
 import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import { getPosts } from "@/lib/actions/post";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AppCard, AppCardContent, AppCardHeader, AppCardTitle } from "@/components/app-card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatDistanceToNow } from "date-fns";
@@ -117,18 +117,17 @@ export const PostList = forwardRef<PostListHandle, PostListProps>(
     if (loading && posts.length === 0) {
       return (
         <div className={className}>
-          <h2 className="text-2xl font-bold mb-4">최근 게시글</h2>
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
-              <Card key={i}>
-                <CardHeader>
+              <AppCard key={i}>
+                <AppCardHeader>
                   <Skeleton className="h-6 w-32" />
-                </CardHeader>
-                <CardContent>
+                </AppCardHeader>
+                <AppCardContent>
                   <Skeleton className="h-4 w-full mb-2" />
                   <Skeleton className="h-4 w-3/4" />
-                </CardContent>
-              </Card>
+                </AppCardContent>
+              </AppCard>
             ))}
           </div>
         </div>
@@ -138,27 +137,25 @@ export const PostList = forwardRef<PostListHandle, PostListProps>(
     if (posts.length === 0) {
       return (
         <div className={className}>
-          <h2 className="text-2xl font-bold mb-4">최근 게시글</h2>
-          <Card>
-            <CardContent className="p-6 text-center">
+          <AppCard>
+            <AppCardContent className="p-6 text-center">
               <p className="text-muted-foreground">아직 게시글이 없습니다.</p>
-            </CardContent>
-          </Card>
+            </AppCardContent>
+          </AppCard>
         </div>
       );
     }
 
     return (
       <div className={className}>
-        <h2 className="text-2xl font-bold mb-4">최근 게시글</h2>
         <div className="space-y-4">
           {posts.map((post) => (
-            <Card key={post.id}>
-              <CardHeader>
+            <AppCard key={post.id} variant="hover" className="rounded-xl">
+              <AppCardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base">
+                  <AppCardTitle className="text-base">
                     {post.user.displayName || post.user.name}
-                  </CardTitle>
+                  </AppCardTitle>
                   <span className="text-xs text-muted-foreground">
                     {formatDistanceToNow(new Date(post.createdAt), {
                       addSuffix: true,
@@ -166,8 +163,8 @@ export const PostList = forwardRef<PostListHandle, PostListProps>(
                     })}
                   </span>
                 </div>
-              </CardHeader>
-              <CardContent>
+              </AppCardHeader>
+              <AppCardContent>
                 <div className="mb-2">{post.content}</div>
                 {post.preview && post.preview.url && (
                   <div className="mt-4 border rounded-md p-3 bg-muted/30">
@@ -186,8 +183,8 @@ export const PostList = forwardRef<PostListHandle, PostListProps>(
                     )}
                   </div>
                 )}
-              </CardContent>
-            </Card>
+              </AppCardContent>
+            </AppCard>
           ))}
         </div>
 

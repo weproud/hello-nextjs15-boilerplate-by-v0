@@ -5,6 +5,7 @@ import Script from 'next/script';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Card, CardContent } from '@/components/ui/card';
+import { AppCard, AppCardContent } from '@/components/app-card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
@@ -123,19 +124,19 @@ export function ThreadsPreview({ url, className }: ThreadsPreviewProps) {
 
   if (!threadsData.postId) {
     return (
-      <Card className="overflow-hidden">
-        <CardContent className="p-0">
+      <AppCard variant="border" className="overflow-hidden rounded-lg">
+        <AppCardContent className="p-0">
           <div className="flex h-[400px] w-full items-center justify-center rounded-lg border border-zinc-200 bg-zinc-50 text-sm text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
             올바르지 않은 Threads URL입니다
           </div>
-        </CardContent>
-      </Card>
+        </AppCardContent>
+      </AppCard>
     );
   }
 
   return (
-    <Card className={cn('overflow-hidden', className)}>
-      <CardContent className="p-0">
+    <AppCard variant="gradient" className={cn('overflow-hidden rounded-lg', className)}>
+      <AppCardContent className="p-0">
         {loading ? (
           <div className="flex h-[400px] items-center justify-center bg-muted">
             <Skeleton className="h-full w-full" />
@@ -212,7 +213,7 @@ export function ThreadsPreview({ url, className }: ThreadsPreviewProps) {
             </div>
           </div>
         )}
-      </CardContent>
+      </AppCardContent>
 
       {/* Threads 임베드 스크립트 */}
       <Script
@@ -220,6 +221,6 @@ export function ThreadsPreview({ url, className }: ThreadsPreviewProps) {
         strategy="afterInteractive"
         onLoad={handleScriptLoad}
       />
-    </Card>
+    </AppCard>
   );
 }

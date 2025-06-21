@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { AppCard, AppCardContent } from "@/components/app-card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface SitePreviewProps {
@@ -70,8 +71,8 @@ export function SitePreview({ url }: SitePreviewProps) {
   };
 
   return (
-    <Card className="overflow-hidden">
-      <CardContent className="p-0">
+    <AppCard variant="gradient" className="overflow-hidden rounded-lg">
+      <AppCardContent className="p-0">
         {loading ? (
           <div className="flex h-[200px] items-center justify-center bg-muted">
             <Skeleton className="h-full w-full" />
@@ -99,7 +100,7 @@ export function SitePreview({ url }: SitePreviewProps) {
             </div>
           </>
         )}
-      </CardContent>
-    </Card>
+      </AppCardContent>
+    </AppCard>
   );
 }

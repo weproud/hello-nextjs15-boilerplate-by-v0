@@ -40,8 +40,8 @@ export function NavigationBar() {
   };
 
   return (
-    <div className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="w-full flex h-16 items-center justify-between px-6">
+    <div className="navigation-bar fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="w-full flex h-[var(--navigation-height)] items-center justify-between px-6">
         {/* 왼쪽: 로고 + 네비게이션 */}
         <div className="flex items-center space-x-6">
           <Link href="/" className="flex items-center space-x-2">
@@ -124,9 +124,6 @@ export function NavigationBar() {
 
           {isAuthenticated ? (
             <div className="flex items-center space-x-2">
-              <span className="text-sm text-muted-foreground hidden sm:block">
-                {session?.user?.email}
-              </span>
               <Button variant="outline" onClick={handleSignOut}>
                 로그아웃
               </Button>
