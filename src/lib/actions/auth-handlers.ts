@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
-import { z } from "zod";
 import { createSafeActionClient } from "next-safe-action";
 import { redirect } from "next/navigation";
+import { z } from "zod";
 
 /**
  * 기본 액션 클라이언트 생성
@@ -83,42 +83,6 @@ export function createPublicAction<TSchema extends z.ZodTypeAny>(schema: TSchema
   return publicActionClient.inputSchema(schema);
 }
 
-// 타입 정의
-export type AuthActionHandler<TInput, TOutput> = (
-  input: TInput,
-  userId: string
-) => Promise<TOutput>;
 
-export type PublicActionHandler<TInput, TOutput> = (
-  input: TInput
-) => Promise<TOutput>;
 
-/**
- * 기존 withAuth 함수와의 호환성을 위한 래퍼 (deprecated)
- * @deprecated createAuthAction을 사용하세요
- */
-export async function withAuth<TSchema extends z.ZodTypeAny, TOutput>(
-  schema: TSchema,
-  handler: AuthActionHandler<z.infer<TSchema>, TOutput>
-) {
-  console.warn("withAuth는 deprecated됩니다. createAuthAction을 사용하세요.");
-  
-  return createAuthAction(schema).action(async ({ parsedInput, ctx }) => {
-    return handler(parsedInput, ctx.user.id);
-  });
-}
 
-/**
- * 기존 withoutAuth 함수와의 호환성을 위한 래퍼 (deprecated)
- * @deprecated createPublicAction을 사용하세요
- */
-export async function withoutAuth<TSchema extends z.ZodTypeAny, TOutput>(
-  schema: TSchema,
-  handler: PublicActionHandler<z.infer<TSchema>, TOutput>
-) {
-  console.warn("withoutAuth는 deprecated됩니다. createPublicAction을 사용하세요.");
-  
-  return createPublicAction(schema).action(async ({ parsedInput }) => {
-    return handler(parsedInput);
-  });
-}

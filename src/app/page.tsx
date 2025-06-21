@@ -1,13 +1,11 @@
 "use client";
 
-import { PostForm } from "@/components/post/post-form";
+import { ErrorTest } from "@/components/error-test";
 import { PostList, PostListHandle } from "@/components/post/post-list";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Toaster } from "@/components/ui/sonner";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useRef } from "react";
 
 export default function Home() {
@@ -37,30 +35,23 @@ export default function Home() {
             </p>
           </div>
 
-          {isAuthenticated ? (
-            <div className="w-full">
-              <h2 className="text-2xl font-bold mb-4">게시글 작성</h2>
-              <PostForm className="mb-8" onPostCreated={handlePostCreated} />
-            </div>
-          ) : (
-            <div className="w-full p-6 border rounded-lg bg-muted/30">
-              <p className="text-center text-lg mb-4">
-                게시글을 작성하려면 로그인이 필요합니다.
-              </p>
-              <div className="flex justify-center">
-                <Button size="lg" asChild>
-                  <Link href="/auth/signin">로그인하기</Link>
-                </Button>
-              </div>
-            </div>
-          )}
 
-          <Separator />
 
           <div>
             <h2 className="text-2xl font-bold mb-6">최근 게시글</h2>
             <PostList ref={postListRef} />
           </div>
+
+          {/* Error Boundary 테스트 섹션 (개발 환경에서만) */}
+          {process.env.NODE_ENV === "development" && (
+            <>
+              <Separator />
+              <div>
+                <h2 className="text-2xl font-bold mb-6">개발자 도구</h2>
+                <ErrorTest />
+              </div>
+            </>
+          )}
         </main>
       </div>
     </div>

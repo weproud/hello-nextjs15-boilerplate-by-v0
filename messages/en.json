@@ -1,5 +1,29 @@
 {
   "HomePage": {
-    "title": "Hello world!"
+    "title": "Hello World"
+  },
+  "ErrorPage": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try again later.",
+    "retry": "Try Again",
+    "goHome": "Go to Home"
+  },
+  "ErrorBoundary": {
+    "title": "An error occurred in the app",
+    "description": "An unexpected problem occurred. Please refresh the page or try again later.",
+    "retry": "Try Again",
+    "refresh": "Refresh Page",
+    "goHome": "Go to Home",
+    "showDetails": "Show Error Details",
+    "hideDetails": "Hide Details"
+  },
+  "LoadingPage": {
+    "title": "Loading...",
+    "description": "Please wait a moment"
+  },
+  "NotFoundPage": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "goHome": "Go to Home"
   }
 }
